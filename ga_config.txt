@@ -1,0 +1,18 @@
+# Archivo de configuración para el Algoritmo Genético (GA)
+# Formato: parametro=valor
+# Las líneas que comienzan con # son comentarios
+
+# Tamaño de la población
+populationSize=200
+
+# Número de generaciones
+generations=10000
+
+# Tamaño del torneo para selección
+tournamentK=3
+
+# Probabilidad de aplicar crossover (0.0 a 1.0)
+crossoverRate=0.8
+
+# Probabilidad de mutar un hijo (0.0 a 1.0)
+mutationRate=0.5

@@ -1,0 +1,22 @@
+# Archivos compilados
+*.o
+*.out
+spp_solver
+
+# Archivos de respaldo
+*~
+*.bak
+*.swp
+
+# Directorios de compilación
+build/
+bin/
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
