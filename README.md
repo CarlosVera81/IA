@@ -1,12 +1,3 @@
-# Algoritmo Genético para el Problema SPP
-
-Este proyecto implementa un algoritmo genético para resolver el Sensor Placement Problem (SPP) con cortes guillotinables.
-
-## Estructura del Proyecto
-
-### Archivos de Código
-
-- **instance.h/cpp**: Manejo de datos de instancias del problema
   - Carga de instancias desde archivos .spp
   - Cálculo de estadísticas globales (media y varianza)
 
@@ -44,8 +35,9 @@ Este proyecto implementa un algoritmo genético para resolver el Sensor Placemen
   - populationSize: Tamaño de la población
   - generations: Número de generaciones
   - tournamentK: Tamaño del torneo para selección
-  - crossoverRate: Probabilidad de aplicar crossover
-  - mutationRate: Probabilidad de mutar un hijo
+- `crossoverRate`: Probabilidad de cruce (0.0 - 1.0).
+- `mutationRate`: Probabilidad de mutación (0.0 - 1.0).
+- `instancePath`: Ruta de la carpeta o archivo de instancias a procesar (ej. `Instancias/Pequeñas` o `Instancias`). Si es una carpeta, busca recursivamente.
 
 ### Otros Archivos
 

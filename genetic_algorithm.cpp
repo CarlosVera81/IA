@@ -28,7 +28,7 @@ Solution crossover(const Instance &inst,
                    std::mt19937 &rng) {
     int L = (int)p1.genome.size();
 
-    if (L == 0 || (int)p2.genome.size() != L) {
+    if (L < 2 || (int)p2.genome.size() != L) {
         return (p1.fitness <= p2.fitness) ? p1 : p2;
     }
     Solution child;

@@ -3,6 +3,14 @@
 #include <iostream>
 #include <random>
 
+/**
+ * @brief Punto de entrada principal del programa.
+ * 
+ * Carga la configuración, solicita parámetros al usuario y procesa las instancias
+ * ubicadas en la carpeta especificada.
+ * 
+ * @return 0 si la ejecución fue exitosa.
+ */
 int main() {
     // Cargar configuración del GA desde archivo
     GAParams gaParams;
@@ -12,8 +20,8 @@ int main() {
     int p = pedirP();
     double alpha = pedirAlpha();
 
-    // Ruta de la carpeta de instancias (hardcoded por ahora)
-    std::string folderPath = "Instancias/Pequeñas";
+    // Ruta de la carpeta de instancias (desde config)
+    std::string folderPath = gaParams.instancePath;
     
     // Opcional: descomentar para pedir la ruta al usuario
     /*

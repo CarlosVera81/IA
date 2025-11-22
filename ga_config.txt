@@ -16,3 +16,6 @@ crossoverRate=0.8
 
 # Probabilidad de mutar un hijo (0.0 a 1.0)
 mutationRate=0.5
+
+# Ruta de las instancias
+instancePath=Instancias

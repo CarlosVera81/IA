@@ -52,6 +52,8 @@ bool loadGAConfig(const std::string &configPath, GAParams &params) {
             params.crossoverRate = std::stod(value);
         } else if (key == "mutationRate") {
             params.mutationRate = std::stod(value);
+        } else if (key == "instancePath") {
+            params.instancePath = value;
         }
     }
 
@@ -60,7 +62,8 @@ bool loadGAConfig(const std::string &configPath, GAParams &params) {
     std::cout << "  generations = " << params.generations << "\n";
     std::cout << "  tournamentK = " << params.tournamentK << "\n";
     std::cout << "  crossoverRate = " << params.crossoverRate << "\n";
-    std::cout << "  mutationRate = " << params.mutationRate << "\n\n";
+    std::cout << "  mutationRate = " << params.mutationRate << "\n";
+    std::cout << "  instancePath = " << params.instancePath << "\n\n";
 
     return true;
 }
@@ -148,7 +151,8 @@ void processInstancesInFolder(const std::string &folderPath,
     }
 
     std::vector<std::string> files;
-    for (const auto &entry : fs::directory_iterator(folderPath)) {
+    // Usar recursive_directory_iterator para buscar en subcarpetas
+    for (const auto &entry : fs::recursive_directory_iterator(folderPath)) {
         if (entry.is_regular_file() && entry.path().extension() == ".spp") {
             files.push_back(entry.path().string());
         }
@@ -185,8 +189,45 @@ void processInstancesInFolder(const std::string &folderPath,
         Solution best = runGA(inst, params, rng);
 
         std::cout << "  Mejor fitness encontrado = " << best.fitness << "\n";
-        std::cout << "  Matriz Z (etiquetas de zonas) del mejor individuo:\n";
-        printLabelMatrix(inst, best);
-        printZoneVariances(inst, best);
+        
+        // Preparar salida a archivo
+        fs::path p(filePath);
+        std::string filename = p.stem().string();
+        std::string parentDir = p.parent_path().filename().string();
+
+        fs::path outputDir = fs::path("Soluciones") / parentDir;
+        if (!fs::create_directories(outputDir)) {
+             // Si ya existe no es error, pero si falla sí. 
+             // create_directories devuelve false si ya existe, así que no es fiable para error.
+             // Simplemente confiamos en que se creó o ya existía.
+        }
+
+        fs::path outputPath = outputDir / (filename + ".out");
+        std::ofstream out(outputPath);
+        if (!out.is_open()) {
+            std::cerr << "Error al crear archivo de salida: " << outputPath << "\n";
+            continue;
+        }
+
+        // Formato solicitado:
+        // Error Total
+        // Matriz Z
+        out << best.fitness << "\n";
+
+        std::vector<std::vector<int>> labels;
+        if (checkPartition(inst, best, &labels)) {
+            for (int i = 0; i < inst.N; ++i) {
+                for (int j = 0; j < inst.M; ++j) {
+                    out << (labels[i][j] + 1) << (j == inst.M - 1 ? "" : " ");
+                }
+                out << "\n";
+            }
+        } else {
+            std::cerr << "  -> Error: La solución no es una partición válida.\n";
+        }
+
+        std::cout << "  Solución guardada en: " << outputPath << "\n";
+        // printLabelMatrix(inst, best); // Descomentar si se quiere ver en consola
+        // printZoneVariances(inst, best);
     }
 }
