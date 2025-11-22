@@ -52,6 +52,8 @@ bool loadGAConfig(const std::string &configPath, GAParams &params) {
             params.crossoverRate = std::stod(value);
         } else if (key == "mutationRate") {
             params.mutationRate = std::stod(value);
+        } else if (key == "strongMutationRate") {
+            params.strongMutationRate = std::stod(value);
         } else if (key == "instancePath") {
             params.instancePath = value;
         }
@@ -63,6 +65,7 @@ bool loadGAConfig(const std::string &configPath, GAParams &params) {
     std::cout << "  tournamentK = " << params.tournamentK << "\n";
     std::cout << "  crossoverRate = " << params.crossoverRate << "\n";
     std::cout << "  mutationRate = " << params.mutationRate << "\n";
+    std::cout << "  strongMutationRate = " << params.strongMutationRate << "\n";
     std::cout << "  instancePath = " << params.instancePath << "\n\n";
 
     return true;

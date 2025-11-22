@@ -17,5 +17,8 @@ crossoverRate=0.8
 # Probabilidad de mutar un hijo (0.0 a 1.0)
 mutationRate=0.5
 
+# Probabilidad de mutación fuerte (0.0 a 1.0)
+strongMutationRate=0.3
+
 # Ruta de las instancias
 instancePath=Instancias

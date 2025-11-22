@@ -46,7 +46,7 @@ Solution crossover(const Instance &inst,
     return child;
 }
 
-Solution mutate(const Instance &inst,const Solution &original,std::mt19937 &rng) {
+Solution mutate(const Instance &inst,const Solution &original,std::mt19937 &rng, double strongMutationRate) {
     Solution mutated = original;
     std::uniform_real_distribution<double> prob01(0.0, 1.0);
     std::normal_distribution<double> gauss(0.0, 0.1); 
@@ -54,7 +54,7 @@ Solution mutate(const Instance &inst,const Solution &original,std::mt19937 &rng)
     std::bernoulli_distribution newOrient(0.5);
     std::uniform_real_distribution<double> newGamma(0.2, 0.8);
     std::uniform_real_distribution<double> newBeta(0.0, 1.0);
-    bool strongMutation = (prob01(rng) < 0.3); 
+    bool strongMutation = (prob01(rng) < strongMutationRate); 
     if (mutated.genome.empty()) {
         return generateRandomStripSolution(inst, rng);
     }
@@ -164,7 +164,7 @@ Solution runGA(const Instance &inst,
 
             // Mutación
             if (prob01(rng) < params.mutationRate) {
-                child = mutate(inst, child, rng);
+                child = mutate(inst, child, rng, params.strongMutationRate);
             }
 
             newPop.push_back(std::move(child));

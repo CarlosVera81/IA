@@ -12,6 +12,7 @@ struct GAParams {
     int tournamentK    = 3;    ///< Tamaño del torneo para selección
     double crossoverRate = 0.8;///< Probabilidad de cruce
     double mutationRate  = 0.3;///< Probabilidad de mutación
+    double strongMutationRate = 0.3; ///< Probabilidad de mutación fuerte
     std::string instancePath = "Instancias/Pequeñas"; ///< Ruta de las instancias a procesar
 };
 
@@ -50,11 +51,13 @@ Solution crossover(const Instance &inst,
  * @param inst Instancia del problema.
  * @param original Solución original.
  * @param rng Generador de números aleatorios.
+ * @param strongMutationRate Probabilidad de mutación fuerte.
  * @return Nueva solución mutada.
  */
 Solution mutate(const Instance &inst,
                 const Solution &original,
-                std::mt19937 &rng);
+                std::mt19937 &rng,
+                double strongMutationRate);
 
 /**
  * @brief Genera una solución inicial aleatoria basada en franjas (strips).
