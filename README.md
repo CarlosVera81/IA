@@ -32,12 +32,13 @@
 ### Archivos de Configuración
 
 - **ga_config.txt**: Parámetros del algoritmo genético
-  - populationSize: Tamaño de la población
-  - generations: Número de generaciones
-  - tournamentK: Tamaño del torneo para selección
-- `crossoverRate`: Probabilidad de cruce (0.0 - 1.0).
-- `mutationRate`: Probabilidad de mutación (0.0 - 1.0).
-- `instancePath`: Ruta de la carpeta o archivo de instancias a procesar (ej. `Instancias/Pequeñas` o `Instancias`). Si es una carpeta, busca recursivamente.
+  - `populationSize`: Tamaño de la población
+  - `generations`: Número de generaciones
+  - `tournamentK`: Tamaño del torneo para selección
+  - `crossoverRate`: Probabilidad de cruce (0.0 - 1.0).
+  - `mutationRate`: Probabilidad de mutación (0.0 - 1.0).
+  - `strongMutationRate`: Probabilidad de mutación fuerte (0.0 - 1.0)
+  - `instancePath`: Ruta de la carpeta o archivo de instancias a procesar (ej. `Instancias/Pequeñas` o `Instancias`). Si es una carpeta, busca recursivamente.
 
 ### Otros Archivos
 
